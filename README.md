@@ -1,12 +1,12 @@
-# austin
+# Austin
 
-Development version of the R package **austin** (Miscellaneous Esoteric Statistical Scripts)
+Development version of the R package **Austin** for power/sample size computations
 
-To install the development version of **austin** run the following
+To install the development version of **Austin** run the following
 command from within R (this requires that the `devtools` package is
 already installed on the system.
 
 ```r
-devtools::install_github('ekstroem/austin')
+devtools::install_github('ekstroem/Austin')
 ```
 

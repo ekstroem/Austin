@@ -1,6 +1,6 @@
-Package: austin
+Package: Austin
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: A collection of groovy power analysis function
 Version: 1.0
 Date: 2016-08-31
 Author: Claus Ekstrøm <claus@rprimer.dk>
