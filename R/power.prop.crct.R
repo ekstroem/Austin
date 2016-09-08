@@ -21,87 +21,65 @@
 #' @keywords htest
 #' @examples
 #'
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
 #'
-#' ## The function is currently defined as
-#' function (n = NULL, p0 = NULL, pa = NULL, sig.level = 0.05, power = NULL,
-#'     alternative = c("two.sided", "less", "greater"))
-#' {
-#'     if (sum(sapply(list(n, p0, pa, power, sig.level), is.null)) !=
-#'         1)
-#'         stop("exactly one of 'n', 'p0', 'pa', 'power', and 'sig.level' must be NULL")
-#'     if (!is.null(sig.level) && !is.numeric(sig.level) || any(0 >
-#'         sig.level | sig.level > 1))
-#'         stop("'sig.level' must be numeric in [0, 1]")
-#'     alternative <- match.arg(alternative)
-#'     pfun <- function(n, p0, pa, sig.level, alternative) {
-#'         n <- ceiling(n)
-#'         power <- switch(alternative, less = {
-#'             pbinom(qbinom(1 - sig.level, size = n, prob = p0,
-#'                 lower.tail = FALSE) - 1, size = n, prob = pa)
-#'         }, greater = {
-#'             pbinom(qbinom(1 - sig.level, size = n, prob = p0),
-#'                 size = n, prob = pa, lower.tail = FALSE)
-#'         }, two.sided = {
-#'             lx <- qbinom(sig.level, size = n, prob = p0)
-#'             ux <- qbinom(sig.level, size = n, prob = p0, lower.tail = FALSE)
-#'             x <- c(seq(0, lx), seq(ux, n))
-#'             d <- dbinom(x, size = n, prob = p0)
-#'             ordd <- order(d)
-#'             cs <- cumsum(sort(d))
-#'             xval <- which.min(cs < sig.level) - 1
-#'             ssh <- d[ordd[xval]]
-#'             relErr <- 1 + 1e-07
-#'             m <- n * p0
-#'             if (xval == 0) return(0)
-#'             if (x[ordd[xval]] < m) {
-#'                 i <- seq.int(from = ux, to = n)
-#'                 y <- sum(dbinom(i, n, p0) <= ssh * relErr)
-#'                 pbinom(x[ordd[xval]], size = n, prob = pa) +
-#'                   pbinom(n - y, size = n, prob = pa, lower.tail = FALSE)
-#'             } else {
-#'                 i <- seq.int(from = 0, to = lx)
-#'                 y <- sum(dbinom(i, n, p0) <= ssh * relErr)
-#'                 pbinom(y - 1, size = n, prob = pa) + pbinom(x[ordd[xval]] -
-#'                   1, n, pa, lower.tail = FALSE)
-#'             }
-#'         })
-#'         power
-#'     }
-#'     p.body <- Vectorize(pfun)
-#'     ppp <- body(p.body)
-#'     qqq <- quote({
-#'         do.call("mapply", c(FUN = pfun, list(n, p0, pa, sig.level,
-#'             alternative), SIMPLIFY = TRUE, USE.NAMES = TRUE))
-#'     })
-#'     if (is.null(power))
-#'         power <- eval(qqq)
-#'     else if (is.null(n)) {
-#'         ans <- uniroot(function(n) eval(qqq) - power, c(2, 1e+06))
-#'         n <- ans$root + (ans$f.root < 0)
-#'     }
-#'     else if (is.null(p0))
-#'         p0 <- uniroot(function(p0) eval(p.body) - power, c(1e-07,
-#'             1 - 1e-07))$root
-#'     else if (is.null(pa))
-#'         pa <- uniroot(function(pa) eval(p.body) - power, c(1e-07,
-#'             1 - 1e-07))$root
-#'     else if (is.null(sig.level))
-#'         sig.level <- uniroot(function(sig.level) eval(p.body) -
-#'             power, c(1e-10, 1 - 1e-10))$root
-#'     else stop("internal error", domain = NA)
-#'     NOTE <- NULL
-#'     METHOD <- "One-sample exact binomial power calculation"
-#'     structure(list(n = n, p0 = p0, pa = pa, sig.level = sig.level,
-#'         power = power, alternative = alternative, note = NOTE,
-#'         method = METHOD), class = "power.htest")
-#'   }
 #'
 #' @export power.prop.crct
-power.prop.crct <- function(n = NULL, p0 = NULL, pa = NULL, sig.level = 0.05, power = NULL,
+power.prop.crct <- function(n = NULL, p1 = NULL, p2 = NULL, sig.level = 0.05, power = NULL,
+                            rho=NULL, nclusters=NULL,
+                            alternative = c("two.sided", "one.sided"), strict = FALSE,
+                            tol = .Machine$double.eps^0.25) {
+
+
+
+    n = NULL, p0 = NULL, pa = NULL, sig.level = 0.05, power = NULL,
                                alternative = c("two.sided", "less", "greater")) {
+
+
+    power <- function(p2, p1=0.018, alpha=0.05, m=50000/2, rho=.1, n=50000/20) {
+
+        pnorm(  sqrt(
+            m/(1 + (n-1)*rho) * (p1-p2)^2 / ((p1*(1-p1) + p2*(1-p2)))
+            ) - qnorm(1-alpha/2) )
+                                        #  (qnorm(1-alpha/2) + qnorm(power))*(*(1+(n-1)*rho)/(p1-p2)^2
+    }
+
+
+    f <- function(p2, p1=0.018, clustersize=2500, rho=.1, alpha=0.05, power=.8) {
+        delta <- log(p2) + log(1-p1) - log(p1) - log(1-p2)
+        (1+(clustersize-1)*rho)*(qnorm(1-alpha/2)+qnorm(power))^2 / (clustersize*delta^2) * 2*(1/(p1*(1-p1)) + 1/(p2*(1-p2)))
+    }
+
+    power2 <- function(p2, p1=0.018, alpha=0.05, m=50000/2, rho=.1, n=50000/20) {
+        delta <- log(p1*(1-p2)/(p2*(1-p2)))
+        pnorm(  qnorm(1-alpha/2) - sqrt(
+            m*2 * delta^2 / ((1 + (n-1)*rho) * (2/(p1*(1-p1)) + 2/(p2*(1-p2))) )
+            )
+              )
+    }
+
+    diggle <- function(p1, p2, rho=.1, N=50000, clustersize=2500, alpha=0.05, power=.8) {
+        delta2 <- (p1-p2)^2
+        pbar <- (p1+p2)/2
+
+        (qnorm(1-alpha/2)*sqrt(2*pbar*(1-pbar)*(1 + (clustersize-1)*rho)) +
+             qnorm(power)*sqrt((1 + (clustersize-1)*rho)*(p1*(1-p1) + p2*(1-p2)))
+         )^2 / (clustersize*delta2)
+    }
+
+
+
+    power <- function(p2, p1=0.018, alpha=0.05, m=50000/2, rho=.1, n=50000/20) {
+
+        DE <- mean(cs[group1])*length(group1) / (sum(cs[group1]/(1 + (cs[group1]-1)*rho)))
+
+        pnorm(  sqrt(
+            m/(DE) * (p1-p2)^2 / ((p1*(1-p1) + p2*(1-p2)))
+            ) - qnorm(1-alpha/2) )
+                                        #  (qnorm(1-alpha/2) + qnorm(power))*(*(1+(n-1)*rho)/(p1-p2)^2
+    }
+
+
+
 
     if (sum(sapply(list(n, p0, pa, power, sig.level), is.null)) != 1)
         stop("exactly one of 'n', 'p0', 'pa', 'power', and 'sig.level' must be NULL")
