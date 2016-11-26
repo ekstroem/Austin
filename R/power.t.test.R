@@ -33,9 +33,9 @@
 #' @seealso \code{\link{power.prop.test}}
 #' @keywords htest
 #' @examples
-#' power.t.test(delta=300, sd=450, power=.8, ratio=4)
-#' @export power.t.test
-power.t.test <-
+#' power_t_test(delta=300, sd=450, power=.8, ratio=4)
+#' @export
+power_t_test <-
   function (n = NULL, delta = NULL, sd = 1, sig.level = 0.05, power = NULL,
             ratio = 1, sd.ratio = 1,
             type = c("two.sample", "one.sample", "paired"),

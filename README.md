@@ -10,3 +10,10 @@ already installed on the system.
 devtools::install_github('ekstroem/Austin')
 ```
 
+
+
+### Current planned extensions
+
+* Power computations for cluster randomized trials with uneven cluster
+sizes for both numeric/quantitative and binary outcomes
+* Power calculations for wedge designs
