@@ -11,5 +11,5 @@ License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.6)
 LinkingTo: Rcpp
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000
 Encoding: UTF-8

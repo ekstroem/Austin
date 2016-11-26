@@ -23,8 +23,8 @@
 #'
 #'
 #'
-#' @export power.prop.crct
-power.prop.crct <- function(n = NULL,
+#' @export
+power_prop_crct <- function(n = NULL,
                             p1 = NULL,
                             p2 = NULL,
                             sig.level = 0.05,
@@ -36,9 +36,7 @@ power.prop.crct <- function(n = NULL,
 
 
 
-    power <- function(p2, p1=0.018, alpha=0.05, m=50000/2, rho=.1, n=50000/20) {
-
-
+# Egentlig skal det baseres på dette    power <- function(p2, p1=0.018, alpha=0.05, m=50000/2, rho=.1, n=50000/20) {
 
 
     p.body <- quote({
@@ -49,14 +47,10 @@ power.prop.crct <- function(n = NULL,
             m/(1 + (n-1)*rho) * (p1-p2)^2 / ((p1*(1-p1) + p2*(1-p2)))
             ) - qnorm(1-alpha/2) )
         #  (qnorm(1-alpha/2) + qnorm(power))*(*(1+(n-1)*rho)/(p1-p2)^2
-    }
-
-
     })
+
     if (is.null(power))
         power <- eval(p.body)
-
-
 
 
     if (sum(sapply(list(n, p0, pa, power, sig.level), is.null)) != 1)
@@ -66,7 +60,6 @@ power.prop.crct <- function(n = NULL,
         stop("'sig.level' must be numeric in [0, 1]")
 
     alternative <- match.arg(alternative)
-
 
     NOTE <- NULL
     METHOD <- "One-sample exact binomial power calculation"

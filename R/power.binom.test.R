@@ -26,8 +26,8 @@
 #' power.binom.test(p0 = .50, pa = .75, power = .90) ## =>     n = 41
 #' power.binom.test(n = 50, p0 = .25, power = .90, alternative="less")  ## => pa = 0.0954
 #'
-#' @export power.binom.test
-power.binom.test <- function(n = NULL, p0 = NULL, pa = NULL, sig.level = 0.05, power = NULL,
+#' @export
+power_binom._test <- function(n = NULL, p0 = NULL, pa = NULL, sig.level = 0.05, power = NULL,
                                alternative = c("two.sided", "less", "greater")) {
 
     if (sum(sapply(list(n, p0, pa, power, sig.level), is.null)) != 1)
