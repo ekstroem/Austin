@@ -2,13 +2,13 @@
 
 #Styrkeberegninger for t-test, hvor der korrigeres for cluster randomized sampling
 
-#Bygget på funktionen power.t.test og 
-#bogen "Allan Donner & Neil Klar: Design and Analysis of 
+#Bygget på funktionen power.t.test og
+#bogen "Allan Donner & Neil Klar: Design and Analysis of
 #Cluster Randomization Trials in Health Research" (Donner & Klark 2000)
 
 #-----------------------------------------------------------------------
-#Følgende funktioner beregner standard-error på estimatoren af 
-#behandlingseffekten, når der korrigeres for intracluster korrelations 
+#Følgende funktioner beregner standard-error på estimatoren af
+#behandlingseffekten, når der korrigeres for intracluster korrelations
 #koefficienten. Jævnfør Donner & Klark 2000, side 111-116.
 
 #Hjælpe-funktion. Jævnfør Donner & Klark 2000, side 112.
@@ -41,10 +41,10 @@ SE_mod <- function(sd,C_1,C_2,M_1,M_2) {
 #strict: Angiver om der også skal medregnes sandsynlighed i den nedre del af halen i en to-sidet test
 
 power.t.test.mod <-
-function (num_obs_clus_group_1, num_obs_clus_group_2, delta, sd = 1, rho, sig.level = 0.05, 
-          alternative = c("two.sided","one.sided"),strict=FALSE) 
+function (num_obs_clus_group_1, num_obs_clus_group_2, delta, sd = 1, rho, sig.level = 0.05,
+          alternative = c("two.sided","one.sided"),strict=FALSE)
 {
-  
+
   alternative <- match.arg(alternative)
   tside <- switch(alternative, one.sided = 1, two.sided = 2)
   if (tside==2) {delta <- abs(delta)}
@@ -56,9 +56,9 @@ function (num_obs_clus_group_1, num_obs_clus_group_2, delta, sd = 1, rho, sig.le
   this_SE_mod <- SE_mod(sd,C_1,C_2,M_1,M_2)
   this_ncp <- delta/this_SE_mod #Non-centralitets-parameter til bestemmelse af fordelingen af t-statistikken under den alternative hypotese
   df <- (M_1 + M_2 - 2)
-  
+
   q <- qt(sig.level/tside, df, lower.tail = FALSE)
-  
+
   if (strict && tside==2) {
     power <- (pt(q, df, ncp = this_ncp, lower.tail = FALSE)
               +pt(-q, df,ncp=this_ncp,lower.tail=TRUE))
@@ -104,7 +104,7 @@ test_against_power.t.test <- function() {
     if (find_alt==2) {
       this_alt<-"two.sided"
       find_strict <- sample(0:1,1)
-      if (find_strict==0) { 
+      if (find_strict==0) {
         this_strict<-FALSE
       }
       if (find_strict==1) {
