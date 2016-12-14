@@ -22,9 +22,9 @@
 #' @keywords htest
 #' @examples
 #'
-#' power.binom.test(n = 50, p0 = .50, pa = .75)      ## => power = 0.971
-#' power.binom.test(p0 = .50, pa = .75, power = .90) ## =>     n = 41
-#' power.binom.test(n = 50, p0 = .25, power = .90, alternative="less")  ## => pa = 0.0954
+#' power_binom_test(n = 50, p0 = .50, pa = .75)      ## => power = 0.971
+#' power_binom_test(p0 = .50, pa = .75, power = .90) ## =>     n = 41
+#' power_binom_test(n = 50, p0 = .25, power = .90, alternative="less")  ## => pa = 0.0954
 #'
 #' @export
 power_binom_test <- function(n = NULL, p0 = NULL, pa = NULL, sig.level = 0.05, power = NULL,
