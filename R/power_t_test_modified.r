@@ -1,22 +1,6 @@
 #WORK IN PROGRESS!
 #-------------------------------------------------------------------
 
-#Lav dokumentation.
-
-#Undersøg problemer med simulation-testen:
-# - når alt="two.sided" og strict="FALSE", undervurderer power.t.test.mod
-#eksperimentets power i forhold til, hvor mange nul-hypoteser t-testen forkaster.
-#Altså gælder det her, at enten undervurderer power.t.test testens styrke, eller 
-#også har t-testen for let ved at forkaste nulhypoteser.
-#Jeg tror, at det er fordi, at t-testen behandler situationen som en almindelig one-sided,
-#men power.t.test.mod behandler testen som en blanding ved på den ene side at tage at dele signifikans-
-#niveauet ud på begge sider af fordelingen, men på den anden side kun at integegrere over den ene side.
-
-#Udvid til også at kunne have to forskellige sd i grupperne
-
-
-#-------------------------------------------------------------------
-
 #Styrkeberegninger for t-test, hvor der korrigeres for cluster randomized sampling
 
 #Bygget p? funktionen power.t.test og 
