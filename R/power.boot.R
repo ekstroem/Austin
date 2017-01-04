@@ -23,8 +23,8 @@
 #'
 #'
 #'
-#' @export
-power_prop_crct <- function(n = NULL,
+#' @export<
+power_boot <- function(n = NULL,
                             p1 = NULL,
                             p2 = NULL,
                             sig.level = 0.05,
