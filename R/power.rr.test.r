@@ -26,7 +26,6 @@
 #' power_binom_test(p0 = .50, pa = .75, power = .90) ## =>     n = 41
 #' power_binom_test(n = 50, p0 = .25, power = .90, alternative="less")  ## => pa = 0.0954
 #'
-#' @export
 power_rr_test <- function(n = NULL, pi = NULL, r = NULL, lambda=NULL, sig.level = 0.05, power = NULL,
                                alternative = c("two.sided", "less", "greater")) {
 
@@ -45,7 +44,7 @@ power_rr_test <- function(n = NULL, pi = NULL, r = NULL, lambda=NULL, sig.level 
     ## Think they should be okay
 
     nfun <- quote({(r+1) / (r*(lambda-1)^2*pi^2) * (
-qnorm(1-sig.level/2)*sqrt((r+1)*pc*(1-pc)) + qnorm(power)sqrt(lambda*pi*(1-lambda*pi) + r*pi*(1-pi))
+qnorm(1-sig.level/2)*sqrt((r+1)*pc*(1-pc)) + qnorm(power)*sqrt(lambda*pi*(1-lambda*pi) + r*pi*(1-pi))
         )^2})
 
 
