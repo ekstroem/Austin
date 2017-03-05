@@ -43,12 +43,10 @@ power_rr_test <- function(n = NULL, pi = NULL, r = NULL, lambda=NULL, sig.level 
     ## Check boundary conditions!
     ## Think they should be okay
 
-    nfun <- quote({(r+1) / (r*(lambda-1)^2*pi^2) * (
-qnorm(1-sig.level/2)*sqrt((r+1)*pc*(1-pc)) + qnorm(power)*sqrt(lambda*pi*(1-lambda*pi) + r*pi*(1-pi))
-        )^2})
+#    nfun <- quote({(r+1) / (r*(lambda-1)^2*pi^2) * ( qnorm(1-sig.level/2)*sqrt((r+1)*pc*(1-pc)) + qnorm(power)*sqrt(lambda*pi*(1-lambda*pi) + r*pi*(1-pi))         )^2})
 
 
-n=\frac{r+1}{r(\lambda -1)^{2}\pi^{2} }\left [ z <- {\alpha }\sqrt{(r+1)p <- {c}(1-p <- {c})}+z <- {\beta }\sqrt{\lambda \pi (1-\lambda \pi)+r\pi(1-\pi )} \right ]^{2}
+#n=\frac{r+1}{r(\lambda -1)^{2}\pi^{2} }\left [ z <- {\alpha }\sqrt{(r+1)p <- {c}(1-p <- {c})}+z <- {\beta }\sqrt{\lambda \pi (1-\lambda \pi)+r\pi(1-\pi )} \right ]^{2}
 
 
     pfun <- function(n, p0, pa, sig.level, alternative) {
