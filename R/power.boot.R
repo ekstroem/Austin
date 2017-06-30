@@ -23,7 +23,7 @@
 #'
 #'
 #'
-#' @export<
+#' @export
 power_boot <- function(n = NULL,
                             p1 = NULL,
                             p2 = NULL,

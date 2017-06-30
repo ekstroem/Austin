@@ -48,4 +48,3 @@ this the function is usually quite stable.
 Claus Ekstrom \email{claus@rprimer.dk}
 }
 \keyword{htest}
-

@@ -56,4 +56,3 @@ and its Analogue with R Controls per Case
 Claus Ekstrom \email{claus@rprimer.dk}
 }
 \keyword{htest}
-

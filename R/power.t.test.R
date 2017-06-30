@@ -30,7 +30,7 @@
 #' see errors from it, notably about inability to bracket the root
 #' when invalid arguments are given.
 #' @author Claus Ekstrom \email{claus@@rprimer.dk}
-#' @seealso \code{\link{power.prop.test}}
+#' @seealso \code{\link{power.t.test}}, \code{\link{power_prop_test}}, \code{\link{power.prop.test}}
 #' @keywords htest
 #' @examples
 #' power_t_test(delta=300, sd=450, power=.8, ratio=4)
@@ -109,8 +109,9 @@ classical=(1+ratio)*n-2))
   }
 
 
-  METHOD <- paste(switch(type, one.sample = "One-sample", two.sample = ifelse(ratio==1, "Two-sample", "Two-sample with unequal sizes"),
-                         paired = "Paired"), "t test power calculation")
+  METHOD <- paste(switch(type, one.sample = "One-sample t test power calculation",
+                               two.sample = ifelse(ratio==1, "Two-sample t test power calculation", "Two-sample t test power calculation with unequal sizes"),
+                         paired = "Paired t test power calculation"))
   structure(list(n = n, delta = delta, sd = sd, sig.level = sig.level,
                  power = power, alternative = alternative, note = NOTE,
                  method = METHOD), class = "power.htest")

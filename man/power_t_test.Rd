@@ -60,10 +60,9 @@ when invalid arguments are given.
 power_t_test(delta=300, sd=450, power=.8, ratio=4)
 }
 \seealso{
-\code{\link{power.prop.test}}
+\code{\link{power.t.test}}, \code{\link{power_prop_test}}, \code{\link{power.prop.test}}
 }
 \author{
 Claus Ekstrom \email{claus@rprimer.dk}
 }
 \keyword{htest}
-
