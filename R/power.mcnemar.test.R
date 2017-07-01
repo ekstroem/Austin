@@ -6,7 +6,7 @@
 #'
 #' @param n Number of observations (number of pairs)
 #' @param paid The probability that a case patient is not exposed and that the
-#' corresponding control patient was exposed
+#' corresponding control patient was exposed (specifying p_12 in the 2 x 2 table)
 #' @param psi The odds ratio for exposure in case and control individuals
 #' @param sig.level Significance level (Type I error probability)
 #' @param power Power of test (1 minus Type II error probability)
@@ -24,6 +24,10 @@
 #' @keywords htest
 #' @examples
 #'
+#' # Assume that pi_21 is 0.125 and we wish to detect an OR of 2.
+#' # This implies that pi_12=0.25, and with alpha=0.05, and a power of 90% you get
+#' power_mcnemar_test(n=NULL, paid=.125, psi=2, power=.9)
+#' 
 #' power_mcnemar_test(n=NULL, paid=.1, psi=2, power=.8, method="normal")
 #' power_mcnemar_test(n=NULL, paid=.1, psi=2, power=.8)
 #'
