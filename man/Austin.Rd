@@ -15,28 +15,6 @@ particular in relation to statistical genetics
 Ekstrøm, C. (2017). The R Primer. Chapman & Hall, 2nd edition.
 }
 \author{
-Claus Thorn Ekstrøm \email{ekstrom@sund.ku.dk}\cr Maintainer: Claus Thorn Ekstrøm
-\email{ekstrom@sund.ku.dk}
+Claus Thorn Ekstrøm \email{ekstrom@sund.ku.dk}\cr Maintainer: Claus Thorn Ekstrøm \email{ekstrom@sund.ku.dk}
 }
-\keyword{#}
-\keyword{'}
-\keyword{.registration}
-\keyword{=}
-\keyword{@}
-\keyword{Austin,}
-\keyword{From}
-\keyword{L}
-\keyword{Rcpp}
-\keyword{TRUE}
-\keyword{eDy}
-\keyword{i}
-\keyword{ib}
-\keyword{mp}
-\keyword{n}
-\keyword{o}
 \keyword{package}
-\keyword{r}
-\keyword{s}
-\keyword{sourceCpp}
-\keyword{t}
-\keyword{u}
