@@ -4,10 +4,6 @@
 #' functions that enhances a number of existing packages and provides In
 #' particular in relation to statistical genetics
 #'
-#' \tabular{ll}{ Package: \tab Austin\cr Type: \tab Package\cr Version: \tab
-#' 1.0\cr Date: \tab 2012-03-29\cr License: \tab GPL-2\cr } % ~~ An overview of
-#' how to use the package, including the most important ~~ % ~~ functions ~~
-#'
 #' @name Austin
 #' @aliases Austin-package Austin
 #' @docType package
