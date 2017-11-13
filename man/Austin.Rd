@@ -4,7 +4,6 @@
 \name{Austin}
 \alias{Austin}
 \alias{Austin-package}
-\alias{Austin-package}
 \title{Collection of miscellaneous useful and semi-useful functions}
 \description{
 Collection of miscellaneous useful and semi-useful functions and add-on

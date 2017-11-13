@@ -3,11 +3,13 @@
 #' Compute power of test, or determine parameters to obtain target power for
 #' matched case-control studies.
 #'
+#' If psi is less than 1 then the two probabilities p_12 and p_21 are reversed.
+#'
 #'
 #' @param n Number of observations (number of pairs)
 #' @param paid The probability that a case patient is not exposed and that the
-#' corresponding control patient was exposed (specifying p_12 in the 2 x 2 table)
-#' @param psi The odds ratio for exposure in case and control individuals
+#' corresponding control patient was exposed (specifying p_12 in the 2 x 2 table).
+#' @param psi The relative probability that a control patient is not exposed and that the corresponding case patient was exposed compared to the probability that a case patient is not exposed and that the corresponding control patient was exposed (p12 / p21 in the 2x2 table).
 #' @param sig.level Significance level (Type I error probability)
 #' @param power Power of test (1 minus Type II error probability)
 #' @param alternative One- or two-sided test
@@ -42,9 +44,21 @@ power_mcnemar_test <- function(n = NULL, paid = NULL, psi = NULL, sig.level = 0.
         stop("exactly one of 'n', 'paid', 'psi', 'power', and 'sig.level' must be NULL")
     if (!is.null(sig.level) && !is.numeric(sig.level) || any(0 > sig.level | sig.level > 1))
         stop("'sig.level' must be numeric in [0, 1]")
+    if (any(paid <=0) || any(paid>=1)) {
+        stop("paid is a probability and must be 0<paid<1")
+    }
+    if (any(psi <=0)) {
+        stop("psi must be non-negative")
+    }    
     alternative <- match.arg(alternative)
     method <- match.arg(method)
     tside <- switch(alternative, one.sided = 1, two.sided = 2)
+
+    ## Fix if psi was specified to be less that 1
+    if (psi<1) {
+        paid <- paid*psi
+        psi <- 1/psi
+    }
 
 
     f <- function(n, paid, psi, sig.level, power) {
@@ -60,10 +74,6 @@ power_mcnemar_test <- function(n = NULL, paid = NULL, psi = NULL, sig.level = 0.
                    function(y) {
                 lgamma(n+1) - lgamma(n-x+1) - lgamma(y+1) - lgamma(x-y+1) + (n-x)*log(1-pd) + y*log((d+pd)/2) + (x-y)*log((pd-d)/2)
             } )
-#            cat("====\n")
-#            print(res)
-#            print(hhh)
-#            print(exp(hhh))
             sum(exp(hhh))
         })
         )

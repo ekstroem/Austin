@@ -12,9 +12,9 @@ power_mcnemar_test(n = NULL, paid = NULL, psi = NULL, sig.level = 0.05,
 \item{n}{Number of observations (number of pairs)}
 
 \item{paid}{The probability that a case patient is not exposed and that the
-corresponding control patient was exposed (specifying p_12 in the 2 x 2 table)}
+corresponding control patient was exposed (specifying p_12 in the 2 x 2 table).}
 
-\item{psi}{The odds ratio for exposure in case and control individuals}
+\item{psi}{The relative probability that a control patient is not exposed and that the corresponding case patient was exposed compared to the probability that a case patient is not exposed and that the corresponding control patient was exposed (p12 / p21 in the 2x2 table).}
 
 \item{sig.level}{Significance level (Type I error probability)}
 
@@ -31,6 +31,9 @@ Object of class \code{power.htest}, a list of the arguments
 \description{
 Compute power of test, or determine parameters to obtain target power for
 matched case-control studies.
+}
+\details{
+If psi is less than 1 then the two probabilities p_12 and p_21 are reversed.
 }
 \note{
 \code{uniroot} is used to solve power equation for unknowns, so you
