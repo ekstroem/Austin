@@ -1,8 +1,8 @@
 Package: Austin
 Type: Package
 Title: A collection of groovy power analysis function
-Version: 1.0
-Date: 2016-08-31
+Version: 0.1
+Date: 2017-11-15
 Author: Claus Ekstrøm <claus@rprimer.dk>
 Maintainer: Claus Ekstrøm <claus@rprimer.dk>
 Description: The package contains a number of additional power calculation functions to extend the available functions in base R.

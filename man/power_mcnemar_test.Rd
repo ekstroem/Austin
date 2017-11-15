@@ -6,7 +6,7 @@
 \usage{
 power_mcnemar_test(n = NULL, paid = NULL, psi = NULL, sig.level = 0.05,
   power = NULL, alternative = c("two.sided", "one.sided"),
-  method = c("normal", "exact"))
+  method = c("normal", "exact", "cond.exact"))
 }
 \arguments{
 \item{n}{Number of observations (number of pairs)}
@@ -14,7 +14,7 @@ power_mcnemar_test(n = NULL, paid = NULL, psi = NULL, sig.level = 0.05,
 \item{paid}{The probability that a case patient is not exposed and that the
 corresponding control patient was exposed (specifying p_12 in the 2 x 2 table).}
 
-\item{psi}{The relative probability that a control patient is not exposed and that the corresponding case patient was exposed compared to the probability that a case patient is not exposed and that the corresponding control patient was exposed (p12 / p21 in the 2x2 table).}
+\item{psi}{The relative probability that a control patient is not exposed and that the corresponding case patient was exposed compared to the probability that a case patient is not exposed and that the corresponding control patient was exposed (p12 / p21 in the 2x2 table). Also called the discordant proportion ratio}
 
 \item{sig.level}{Significance level (Type I error probability)}
 
@@ -22,7 +22,7 @@ corresponding control patient was exposed (specifying p_12 in the 2 x 2 table).}
 
 \item{alternative}{One- or two-sided test}
 
-\item{method}{Power calculations based on exact or asymptotic test}
+\item{method}{Power calculations based on exact or asymptotic test. The default (normal) corresponds to an approximative test, "exact" is the unconditional exact test, while "cond.exact" is a conditional exact test (given fixed n).}
 }
 \value{
 Object of class \code{power.htest}, a list of the arguments
@@ -55,6 +55,9 @@ power_mcnemar_test(n=NULL, paid=.1, psi=2, power=.8)
 \references{
 Duffy, S (1984). Asymptotic and Exact Power for the McNemar Test
 and its Analogue with R Controls per Case
+
+Fagerland MW, Lydersen S, Laake P. (2013) The McNemar test for binary matched-pairs data: mid-p and asymptotic
+are better than exact conditional. BMC Medical Research Methodology.
 }
 \seealso{
 \code{\link{mcnemar.test}}
