@@ -35,9 +35,9 @@
 #' @examples
 #' power_t_test(delta=300, sd=450, power=.8, ratio=4)
 #' @export
-power_t_test <-
-  function (n = NULL, delta = NULL, sd = 1, sig.level = 0.05, power = NULL,
-            ratio = 1, sd.ratio = 1,
+power_cluster_t_test <-
+  function (n = NULL, m=NULL, delta = NULL, sd = 1, sig.level = 0.05, power = NULL,
+#            ratio = 1, sd.ratio = 1,
             type = c("two.sample", "one.sample", "paired"),
             alternative = c("two.sided", "one.sided"),
             df.method = c("welch", "classical"),
@@ -70,14 +70,14 @@ power_t_test <-
   p.body <- quote({
     nu <- switch(tsample, n-1, switch(df.method, welch=(sd^2/n + (sd*sd.ratio)^2/(n*ratio))^2/((sd^2/n)^2/(n-1) + ((sd*sd.ratio)^2/(ratio*n))^2/(n*ratio-1)),
 classical=(1+ratio)*n-2))
-    pt(qt(sig.level/tside, nu, lower = FALSE), nu, ncp = switch(tsample, sqrt(n/tsample), sqrt(n/(1+sd.ratio^2/ratio))) * delta/sd, lower = FALSE)
+    pt(qt(sig.level/tside, nu, lower = FALSE), nu, ncp = switch(tsample, sqrt(n/tsample), sqrt(n/(1+sd.ratio/ratio))) * delta/sd, lower = FALSE)
   })
   if (strict & tside == 2)
     p.body <- quote({
       nu <- switch(tsample, n-1, switch(df.method, welch=(sd^2/n + (sd*sd.ratio)^2/(n*ratio))^2/((sd^2/n)^2/(n-1) + ((sd*sd.ratio)^2/(ratio*n))^2/(n*ratio-1)),
 classical=(1+ratio)*n-2))
       qu <- qt(sig.level/tside, nu, lower = FALSE)
-      ncp <- switch(tsample, sqrt(n/tsample), sqrt(n/(1+sd.ratio^2/ratio))) * delta/sd
+      ncp <- switch(tsample, sqrt(n/tsample), sqrt(n/(1+sd.ratio/ratio))) * delta/sd
       pt(qu, nu, ncp = ncp, lower = FALSE) +
         pt(-qu, nu, ncp = ncp, lower = TRUE)
     })

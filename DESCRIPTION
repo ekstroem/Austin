@@ -7,7 +7,7 @@ Author: Claus Ekstrøm <claus@rprimer.dk>
 Maintainer: Claus Ekstrøm <claus@rprimer.dk>
 Description: The package contains a number of additional power calculation functions to extend the available functions in base R.
 License: GPL (>= 2)
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.1
 Encoding: UTF-8
 Suggests: 
     testthat

@@ -4,9 +4,9 @@
 \alias{power_mcnemar_test}
 \title{Power Calculations for Exact and Asymptotic McNemar Test in a 2 by 2 table}
 \usage{
-power_mcnemar_test(n = NULL, paid = NULL, psi = NULL, sig.level = 0.05,
-  power = NULL, alternative = c("two.sided", "one.sided"),
-  method = c("normal", "exact", "cond.exact"))
+power_mcnemar_test(n = NULL, paid = NULL, psi = NULL,
+  sig.level = 0.05, power = NULL, alternative = c("two.sided",
+  "one.sided"), method = c("normal", "exact", "cond.exact"))
 }
 \arguments{
 \item{n}{Number of observations (number of pairs)}
